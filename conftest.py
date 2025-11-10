@@ -95,13 +95,19 @@ def context(browser: Browser) -> BrowserContext:
     
     # Enable tracing if configured
     if settings.trace_on_failure:
-        context.tracing.start(screenshots=True, snapshots=True, sources=True)
+        try:
+            context.tracing.start(screenshots=True, snapshots=True, sources=True)
+        except Exception as e:
+            logger.warning(f"Could not start tracing: {e}")
     
     yield context
     
     # Save trace on failure
     if settings.trace_on_failure:
-        context.tracing.stop(path="reports/trace.zip")
+        try:
+            context.tracing.stop(path="reports/trace.zip")
+        except Exception as e:
+            logger.warning(f"Could not stop tracing: {e}")
     
     context.close()
 
@@ -123,12 +129,15 @@ def page(context: BrowserContext, request) -> Page:
     yield page
     
     # Take screenshot on test failure
-    if request.node.rep_call.failed and settings.screenshot_on_failure:
-        screenshot_name = f"failure_{request.node.name}"
-        screenshot_path = settings.screenshots_path / f"{screenshot_name}.png"
-        screenshot_path.parent.mkdir(parents=True, exist_ok=True)
-        page.screenshot(path=str(screenshot_path))
-        logger.info(f"Screenshot saved: {screenshot_path}")
+    try:
+        if hasattr(request.node, 'rep_call') and request.node.rep_call.failed and settings.screenshot_on_failure:
+            screenshot_name = f"failure_{request.node.name}"
+            screenshot_path = settings.screenshots_path / f"{screenshot_name}.png"
+            screenshot_path.parent.mkdir(parents=True, exist_ok=True)
+            page.screenshot(path=str(screenshot_path))
+            logger.info(f"Screenshot saved: {screenshot_path}")
+    except Exception as e:
+        logger.warning(f"Could not capture screenshot: {e}")
     
     page.close()
 
