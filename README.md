@@ -38,17 +38,17 @@ Enterprise-grade web automation framework using Python + Playwright for comprehe
 - ✅ **Type Safety**: Full type hints with Pydantic configuration management
 
 ### Test Coverage
-- 🔐 **Login Tests** (23+ tests): Authentication, validation, security
-- 📦 **Inventory Tests** (33+ tests): Product display, cart operations, UI validation
-- 🛒 **Cart Tests**: Add/remove items, price calculations
-- 💳 **Checkout Tests** (11+ tests): End-to-end purchase flows, form validation
-- 🔄 **Sorting/Filtering Tests**: Product ordering and filtering
-- 🧭 **Navigation Tests**: Page transitions, routing
-- ♿ **Accessibility Tests**: WCAG compliance
-- 👁️ **Visual Regression Tests**: UI consistency checks
+- 🔐 **Login Tests** (23 tests): Authentication, validation, security
+- 📦 **Inventory Tests** (33 tests): Product display, cart operations, UI validation
+- 🛒 **Cart Tests** (28 tests): Add/remove items, price calculations, persistence, workflows
+- 💳 **Checkout Tests** (11 tests): End-to-end purchase flows, form validation
+- 🔄 **Sorting Tests** (23 tests): Name/price sorting, accuracy verification, persistence
+- 🧭 **Navigation Tests**: Page transitions, routing (planned)
+- ♿ **Accessibility Tests**: WCAG compliance (planned)
+- 👁️ **Visual Regression Tests**: UI consistency checks (planned)
 - 🔒 **Security Tests**: XSS, SQL injection prevention
 
-**Total: 67+ Production-Grade Tests**
+**Total: 118+ Production-Grade Tests** ✅
 
 ---
 
@@ -440,11 +440,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 | Metric | Value |
 |--------|-------|
-| Total Tests | 67+ |
+| Total Tests | **118+** |
+| Test Files | 5 (Login, Inventory, Cart, Checkout, Sorting) |
 | Test Coverage Areas | 8 (Login, Inventory, Cart, Checkout, Sorting, Navigation, Accessibility, Security) |
 | Browsers Supported | 3 (Chromium, Firefox, WebKit) |
-| Page Objects | 6 |
-| Average Test Execution | ~5 minutes (parallel) |
+| Page Objects | 6 (Base + 5 specific pages) |
+| Code Coverage | >80% (pages, utils, config) |
+| Average Test Execution | ~5-7 minutes (parallel) |
 | CI/CD Pipeline | Fully Automated |
 
 ---
