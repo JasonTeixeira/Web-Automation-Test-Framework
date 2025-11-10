@@ -81,6 +81,22 @@ disable = [
     "R0913",  # too-many-arguments
 ]
 
+[tool.coverage.run]
+source = ["pages", "utils", "config"]
+omit = [
+    "*/tests/*",
+    "*/conftest.py",
+    "*/__init__.py",
+]
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
+
+[tool.coverage.html]
+directory = "reports/coverage"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
