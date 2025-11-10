@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  test-runner:
+    build: .
+    container_name: web-automation-tests
+    environment:
+      - BASE_URL=https://www.saucedemo.com
+      - BROWSER=chromium
+      - HEADLESS=true
+      - PARALLEL_WORKERS=4
+      - CI=true
+    volumes:
+      - ./reports:/app/reports
+      - ./screenshots:/app/screenshots
+      - ./logs:/app/logs
+    command: >
+      pytest tests/
+      -v
+      -n 4
+      --html=reports/report.html
+      --self-contained-html
+      --alluredir=reports/allure-results
+
+  # Run smoke tests only
+  smoke-tests:
+    build: .
+    container_name: smoke-tests
+    environment:
+      - BASE_URL=https://www.saucedemo.com
+      - BROWSER=chromium
+      - HEADLESS=true
+    volumes:
+      - ./reports:/app/reports
+    command: >
+      pytest tests/
+      -m smoke
+      -v
+      --html=reports/smoke-report.html
+      --self-contained-html
+    profiles:
+      - smoke
+
+  # Run specific test suite
+  specific-suite:
+    build: .
+    container_name: specific-suite
+    environment:
+      - BASE_URL=https://www.saucedemo.com
+      - BROWSER=${BROWSER:-chromium}
+      - HEADLESS=${HEADLESS:-true}
+    volumes:
+      - ./reports:/app/reports
+      - ./screenshots:/app/screenshots
+      - ./logs:/app/logs
+    command: ${TEST_COMMAND:-pytest tests/login/ -v}
+    profiles:
+      - custom
