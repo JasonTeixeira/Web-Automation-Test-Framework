@@ -6,7 +6,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A production-ready web automation framework I built to test the [Sauce Demo](https://www.saucedemo.com) e-commerce app. Built with Python + Playwright, featuring 118+ tests, Page Object Model, multi-browser support, and a complete CI/CD pipeline.
+A web automation framework I built to test the [Sauce Demo](https://www.saucedemo.com) e-commerce app. Built with Python + Playwright, featuring 118+ tests, Page Object Model, multi-browser support, and a complete CI/CD pipeline.
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
